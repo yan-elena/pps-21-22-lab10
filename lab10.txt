@@ -40,7 +40,7 @@ size ([ _ | Xs ], N) :- size ( Xs , N2 ) , N is N2 + 1.
 %==== Ex 2.2 ====
 % size (List , Size )
 % Size will contain the number of elements in List ,
-written using notation zero , s( zero ), s(s( zero ))..
+% written using notation zero , s( zero ), s(s( zero ))..
 
 size_2 ([], zero) .
 size_2 ([_ | Xs], s(N)) :- size_2 (Xs, N) .
@@ -110,3 +110,57 @@ all_bigger ([X|Xs], [Y|Ys]) :- X is Y+1, all_bigger (Xs, Ys) .
 
 sublist ([], _) .
 sublist ([X|Xs], Y) :- member (X, Y), sublist (Xs, Y) .
+
+
+%---- Part4 ----
+
+%==== Ex 4.1 ====
+% seq(N, List )
+% example : seq(5 ,[0 ,0 ,0 ,0 ,0]).
+
+seq(0 ,[]).
+seq(N ,[0|T]) :- N2 is N-1, seq(N2 ,T).
+
+%==== Ex 4.2 ====
+% seqR(N, List )
+% example : seqR(4 ,[4 ,3 ,2 ,1 ,0]).
+
+seqR(0, [0]) .
+seqR(N, [N|T]) :- N2 is N-1, seqR(N2,T) .
+
+%==== Ex 4.2 ====
+% seqR2(N, List )
+% example : seqR2(4 ,[0 ,1 ,2 ,3 ,4]).
+
+addLast([], X, [X]) .
+addLast([H|T], X, [H|L]) :- addLast(T, X, L) .
+
+seqR2(0, [0]) .
+seqR2(N, L) :- addLast(L2, N, L), N2 is N-1, seqR2(N2, L2) .
+
+
+% ---- Part5 ----
+
+%==== Last ====
+% last(List, E) 
+% select the last element in this list
+% example: last([1,2,3], 3).
+
+last([X], X) .
+last([_|T], X) :- last(T, X) .
+
+%==== Drop ====
+% drop(List1, N, List2) 
+% selects all elements except first N ones
+% example: drop([1,2,3,4], 2, [3,4]).
+
+drop(L, 0, L) .
+drop([H|T], N, L) :- N>0, N2 is N-1, drop(T, N2, L) .
+
+%==== Take ====
+% take(List1, N, List2) 
+% selects first N elements
+% example: take([1,2,3,4], 2, [1,2]).
+
+take(L, 0, []) .
+take([H|T], N, [H|L]) :- N>0, N2 is N-1, take(T, N2, L) .
