@@ -85,3 +85,20 @@ maxmin2([H|T], MX, MN, TMX, TMN) :- H=<TMX, H>TMN , maxmin2(T, MX, MN, TMX, TMN)
 maxmin2([H|T], MX, MN, TMX, TMN) :- H>=TMX, maxmin2(T, MX, MN, H, TMN) .
 maxmin2([H|T], MX, MN, TMX, TMN) :- H<TMN, maxmin2(T, MX, MN, TMX, H) .
 
+
+%---- Part3 ----
+
+%==== Ex 3.1 ====
+% same (List1 , List2 )
+% are the two lists exactly the same ?
+
+same ([], []) .
+same ([X|Xs], [X|Ys]) :- same (Xs, Ys).
+
+%==== Ex 3.2 ====
+% all_bigger (List1 , List2 )
+% all elements in List1 are bigger than those in List2, by 1
+% example : all_bigger ([10 ,20 ,30 ,40] ,[9 ,19 ,29 ,39]) .
+
+all_bigger ([], []) .
+all_bigger ([X|Xs], [Y|Ys]) :- X is Y+1, all_bigger (Xs, Ys) .
