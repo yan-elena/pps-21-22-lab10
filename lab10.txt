@@ -51,7 +51,6 @@ size_2([_|Xs], s(N)) :- size_2(Xs, N) .
 sum([], 0) .
 sum([H|Xs], S) :- sum(Xs, S2), S is S2 + H  .
 
-
 %==== Ex 2.4 ====
 % average(List, Average)
 % it uses average(List, Count, Sum, Average)
@@ -132,11 +131,11 @@ seqR(N, [N|T]) :- N2 is N - 1, seqR(N2, T) .
 % seqR2(N, List )
 % example : seqR2(4 ,[0 ,1 ,2 ,3 ,4]).
 
-addLast([], X, [X]) .
-addLast([H|T], X, [H|L]) :- addLast(T, X, L) .
+add_last([], X, [X]) .
+add_last([H|T], X, [H|L]) :- add_last(T, X, L) .
 
 seqR2(0, [0]) .
-seqR2(N, L) :- addLast(L2, N, L), N2 is N-1, seqR2(N2, L2) .
+seqR2(N, L) :- add_last(L2, N, L), N2 is N-1, seqR2(N2, L2) .
 
 
 % ---- Part5 ----
